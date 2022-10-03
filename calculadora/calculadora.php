@@ -10,30 +10,12 @@
 
 <body>
     <?php
+    require 'auxiliar.php';
+
     $op1 = trim($_GET['op1']);
     $op2 = trim($_GET['op2']);
     $op = trim($_GET['op']);
-
-    switch ($op) {
-        case '+':
-            $res = $op1 + $op2;
-            break;
-
-        case '-':
-            $res = $op1 - $op2;
-            break;
-
-        case '*':
-            $res = $op1 * $op2;
-            break;
-
-        case '/':
-            $res = $op1 / $op2;
-            break;
-
-        default:
-            $res = 'Error: operación incorrecta.';
-    }
+    $res = calcular_resultado($op1, $op2, $op);
     ?>
     <p>
         El resultado de <?= "$op1 $op $op2" ?> es <?= $res ?>.
