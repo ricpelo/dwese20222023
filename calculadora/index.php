@@ -12,27 +12,17 @@
     <?php
     require 'auxiliar.php';
 
-    $error = [];
-    if (isset($_GET['op1'])) {
-        $op1 = trim($_GET['op1']);
-    } else {
-        $error[] = 'Falta el parámetro op1';
-    }
-    if (isset($_GET['op2'])) {
-        $op2 = trim($_GET['op2']);
-    } else {
-        $error[] = 'Falta el parámetro op2';
-    }
-    if (isset($_GET['op'])) {
-        $op = trim($_GET['op']);
-    } else {
-        $error[] = 'Falta el parámetro op';
-    }
-    if (empty($error)) {
-        $res = calcular_resultado($op1, $op2, $op);
-        mostrar_resultado($op1, $op2, $op, $res);
-    } else {
-        mostrar_errores($error);
+    $op1 = (isset($_GET['op1'])) ? trim($_GET['op1']) : null;
+    $op2 = (isset($_GET['op2'])) ? trim($_GET['op2']) : null;
+    $op = (isset($_GET['op'])) ? trim($_GET['op']) : null;
+
+    if (isset($op1, $op2, $op)) {
+        try {
+            $res = calcular_resultado($op1, $op2, $op);
+            mostrar_resultado($op1, $op2, $op, $res);
+        } catch (Exception $e) {
+            mostrar_errores([$e->getMessage()]);
+        }
     }
     ?>
 
