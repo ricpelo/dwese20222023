@@ -13,10 +13,10 @@
  * @param  float  $oper2 El segundo operando.
  * @param  string $oper  El operador
  *                       (valores válidos: '+', '-', '*', '/').
- * @param  array  $error El array de errores.
- * @return ?float        El resultado del cálculo.
+ * @return float         El resultado del cálculo.
+ * @throws Exception     Si la operación es incorrecta.
  */
-function calcular_resultado(float $oper1, float $oper2, string $oper, array &$error): ?float
+function calcular_resultado(float $oper1, float $oper2, string $oper): float
 {
     switch ($oper) {
         case '+':
@@ -36,9 +36,7 @@ function calcular_resultado(float $oper1, float $oper2, string $oper, array &$er
             break;
 
         default:
-            // $resul = null;
-            $error[] = 'Error: operación incorrecta.';
-            return null;
+            throw new Exception('Error: operación incorrecta.');
     }
 
     return $resul;
